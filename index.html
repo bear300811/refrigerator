@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>나만의 냉장고</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="fridge-container">
+      <div class="fridge-half left-half">
+        <input type="checkbox" id="left-door-toggle" class="door-toggle" />
+
+        <div class="compartment freezer">
+          <h2>냉동실</h2>
+          <p>여기에 얼음, 고기 등 재료 배치</p>
+        </div>
+
+        <label for="left-door-toggle" class="door left-door">
+          <span class="handle left-handle"></span>
+        </label>
+      </div>
+
+      <div class="fridge-half right-half">
+        <input type="checkbox" id="right-door-toggle" class="door-toggle" />
+
+        <div class="compartment fridge">
+          <h2>냉장실</h2>
+          <p>여기에 채소, 음료 등 재료 배치</p>
+        </div>
+
+        <label for="right-door-toggle" class="door right-door">
+          <span class="handle right-handle"></span>
+        </label>
+      </div>
+    </div>
+  </body>
+</html>

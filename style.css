@@ -1,111 +1,700 @@
-/* 화면 중앙에 냉장고를 배치하기 위한 기본 설정 */
+/* 기본 화면 설정 */
 body {
   margin: 0;
   padding: 0;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(
+    to bottom,
+    #dbe4f0 0%,
+    #dbe4f0 70%,
+    #c4a48c 70%,
+    #a67c52 100%
+  );
+  overflow: hidden; /* 스크롤 방지 */
+  font-family: sans-serif;
+  touch-action: none; /* 모바일에서 화면 쓸어넘기기 방지 */
+}
+
+/* 주방 식탁 및 컨트롤 */
+.kitchen-area {
+  width: 90vw;
+  max-width: 600px; /* 데스크탑에서도 문 잘림 방지를 위해 폭 제한 */
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 10;
+}
+.controls {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+select,
+button {
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+button:hover {
+  background-color: #0056b3;
+}
+.table {
+  background-color: #dcb897;
+  border: 4px solid #a87b51;
+  border-radius: 10px;
+  min-height: 65px;
+  padding: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  position: relative;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+}
+.table-label {
+  position: absolute;
+  top: 4px;
+  left: 10px;
+  color: #724e2c;
+  font-size: 0.75rem;
+  font-weight: bold;
+  pointer-events: none;
+}
+
+/* 🗑️ 쓰레기통 */
+.trash-bin {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  width: 70px;
+  height: 80px;
+  background-color: #f8d7da;
+  border: 3px dashed #dc3545;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #dc3545;
+  font-weight: bold;
+  z-index: 999;
+  transition:
+    transform 0.2s,
+    background-color 0.2s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.trash-bin:hover,
+.trash-bin.drag-over {
+  transform: scale(1.1);
+  background-color: #f1b0b7;
+  border-style: solid;
+}
+.trash-icon {
+  font-size: 1.8rem;
+  pointer-events: none;
+}
+.trash-label {
+  font-size: 0.75rem;
+  pointer-events: none;
+}
+
+/* 🚪 거실로 나가는 문 */
+.exit-wrapper {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  perspective: 800px;
+  z-index: 999;
+}
+.exit-door-frame {
+  display: block;
+  width: 70px;
+  height: 120px;
+  background-color: #2c1a0f;
+  border: 5px solid #8b5a2b;
+  border-bottom: none;
+  position: relative;
+  text-decoration: none;
+}
+.exit-door {
+  width: 100%;
+  height: 100%;
+  background-color: #dcb897;
+  border: 2px solid #a87b51;
+  box-sizing: border-box;
+  transform-origin: left;
+  transition: transform 0.4s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.door-knob {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  background-color: #ffd700;
+  border-radius: 50%;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+.exit-label {
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #343a40;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  white-space: nowrap;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+.exit-door-frame:hover .exit-door {
+  transform: rotateY(-25deg);
+}
+
+/* 움직이는 입체 음식 아이템 */
+.food-item {
+  position: relative;
+  width: 45px;
+  height: 45px;
+  cursor: grab;
+  user-select: none;
+  transition: transform 0.1s;
+  z-index: 100;
+  display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background-color: #f0f8ff; /* 배경색 */
+}
+.food-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 2px 5px 8px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+}
+.food-item:active {
+  cursor: grabbing;
+}
+.food-item.dragging {
+  opacity: 0.5;
+  transform: scale(1.1);
+  z-index: 1000 !important;
 }
 
-/* 냉장고 전체 외관 */
+/* 유통기한 말풍선 */
+.tooltip {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #dc3545;
+  color: white;
+  text-align: center;
+  padding: 5px 8px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  white-space: nowrap;
+  z-index: 1000;
+  transition:
+    opacity 0.2s,
+    visibility 0.2s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
+.tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: inherit;
+  border-color: currentColor transparent transparent transparent;
+}
+.food-item:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* 냉장고 전체 외관 (반응형 최적화) */
 .fridge-container {
   display: flex;
-  width: 600px;
-  height: 700px;
-  border: 15px solid #dcdcdc; /* 냉장고 테두리 두께와 색상 */
-  border-radius: 10px;
-  background-color: #ffffff;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-  perspective: 1500px; /* 3D로 문이 열리는 원근감 효과 부여 */
+  width: 90vw;
+  max-width: 650px; /* 전체 너비를 줄여 문이 잘리지 않도록 제한 */
+  height: 65vh;
+  max-height: 650px;
+  border: 10px solid #8e949a;
+  border-radius: 12px;
+  background-color: #ccd3d9;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  perspective: 2000px;
+  box-sizing: border-box;
 }
-
-/* 냉동실(왼쪽)과 냉장실(오른쪽)을 반반씩 나눔 */
 .fridge-half {
   position: relative;
   width: 50%;
   height: 100%;
-  border-right: 2px solid #cccccc;
+  border-right: 3px solid #b0b7bd;
   box-sizing: border-box;
+  transform-style: preserve-3d;
 }
-
 .fridge-half:last-child {
   border-right: none;
 }
-
-/* 냉장고 내부 공간 설정 */
 .compartment {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #eef2f5;
-  padding: 20px;
+  background-color: #ffffff;
+  padding: 10px;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.08);
+}
+h2 {
   text-align: center;
-  color: #555555;
+  color: #343a40;
+  margin: 0 0 6px 0;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  flex-shrink: 0;
 }
 
-/* 실제 기능을 담당하는 체크박스는 화면에서 숨김 */
+.shelves {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.shelf {
+  flex: 1;
+  min-height: 35px;
+  background-color: rgba(230, 242, 255, 0.3);
+  border: 1px solid rgba(180, 210, 240, 0.5);
+  border-bottom: 5px solid rgba(135, 190, 230, 0.7);
+  border-radius: 4px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 4px;
+  align-items: flex-end;
+  box-sizing: border-box;
+}
+.drawers {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 0 3px;
+  flex-shrink: 0;
+}
+.drawer-container {
+  position: relative;
+  height: 75px;
+  background-color: #e9ecef;
+  border: 2px solid #ced4da;
+  border-radius: 6px;
+  overflow: visible;
+  box-sizing: border-box;
+}
+.drawer-body {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding: 5px;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.15);
+  z-index: 1;
+}
+.drawer-front {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.45) 0%,
+    rgba(248, 249, 250, 0.15) 60%,
+    rgba(206, 212, 218, 0.35) 100%
+  );
+  border: 2px solid rgba(255, 255, 255, 0.55);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 5;
+  transition: transform 0.4s;
+}
+.drawer-handle {
+  width: 50px;
+  height: 8px;
+  background: linear-gradient(to bottom, #dee2e6, #ffffff);
+  border: 1px solid #adb5bd;
+  border-radius: 4px;
+  margin-bottom: 3px;
+}
+.drawer-label {
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: #495057;
+  user-select: none;
+}
+.drawer-container.open .drawer-front {
+  transform: translateY(30px) translateZ(10px);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* 문 회전 축 & 열림 각도 제한 (잘림 해결!) */
 .door-toggle {
   display: none;
 }
-
-/* 냉장고 문 기본 설정 */
 .door {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #ececec;
-  border: 1px solid #bbbbbb;
-  box-sizing: border-box;
-  cursor: pointer; /* 마우스를 올리면 손가락 모양으로 변경 */
-  transition: transform 0.8s ease-in-out; /* 문이 부드럽게 열리는 애니메이션 속도 */
-  z-index: 2; /* 내부 공간보다 위에 오도록 설정 */
-  box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  transition: transform 1.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+  z-index: 10;
+  transform-style: preserve-3d;
 }
-
-/* 왼쪽 문 회전축을 왼쪽 끝으로 설정 */
 .left-door {
   transform-origin: left center;
 }
-
-/* 오른쪽 문 회전축을 오른쪽 끝으로 설정 */
 .right-door {
   transform-origin: right center;
 }
-
-/* 체크박스가 체크되면(클릭되면) 문을 회전시켜 여는 효과 */
+/* 140도에서 110도로 낮춰서 화면 밖으로 문이 삐져나가지 않게 함 */
 #left-door-toggle:checked ~ .left-door {
   transform: rotateY(-110deg);
 }
-
 #right-door-toggle:checked ~ .right-door {
   transform: rotateY(110deg);
 }
 
-/* 냉장고 손잡이 설정 */
+.door-outer,
+.door-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  box-sizing: border-box;
+}
+.door-outer {
+  background: linear-gradient(135deg, #f8f9fa 0%, #dee2e6 40%, #adb5bd 100%);
+  border: 1px solid #868e96;
+  box-shadow: inset -3px 0 10px rgba(0, 0, 0, 0.15);
+  z-index: 2;
+}
+.door-inner {
+  background-color: #f1f3f5;
+  border: 2px solid #dee2e6;
+  transform: rotateY(180deg);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 20px 10px;
+}
+.door-bin {
+  flex: 1;
+  margin: 4px 0;
+  min-height: 40px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border: 2px solid #e9ecef;
+  border-radius: 4px 4px 15px 15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding: 8px 5px 5px 5px;
+  align-items: flex-end;
+  box-sizing: border-box;
+}
 .handle {
   position: absolute;
   top: 50%;
-  width: 12px;
-  height: 160px;
-  background-color: #999999;
+  width: 18px;
+  height: 40%;
+  background: linear-gradient(to right, #495057, #212529 30%, #343a40);
   transform: translateY(-50%);
-  border-radius: 6px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.35);
 }
-
-/* 왼쪽 문 손잡이는 오른쪽 가장자리에 배치 */
 .left-handle {
   right: 15px;
 }
-
-/* 오른쪽 문 손잡이는 왼쪽 가장자리에 배치 */
 .right-handle {
   left: 15px;
+}
+
+/* 디스펜서 & 미니룰렛 크기 축소 */
+.dispenser {
+  position: absolute;
+  top: 30%;
+  right: 45px;
+  width: 70px;
+  height: 120px;
+  background-color: #1a1d20;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10px;
+  box-sizing: border-box;
+}
+.dispenser-screen {
+  width: 45px;
+  height: 20px;
+  background-color: #0b0c0d;
+  border-radius: 3px;
+  margin-bottom: 10px;
+}
+.dispenser-tray {
+  width: 55px;
+  height: 10px;
+  background-color: #343a40;
+  border-radius: 4px;
+  margin-top: auto;
+  margin-bottom: 15px;
+}
+.mini-roulette {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  z-index: 5;
+  transition: transform 0.2s;
+}
+.mini-roulette:hover {
+  transform: scale(1.15);
+}
+.mini-pointer {
+  color: #dc3545;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: -5px;
+  z-index: 2;
+  text-shadow: 1px 1px 1px black;
+}
+.mini-wheel {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #343a40;
+  background: conic-gradient(
+    #ffb3ba 0 45deg,
+    #ffdfba 45deg 90deg,
+    #ffffba 90deg 135deg,
+    #baffc9 135deg 180deg,
+    #bae1ff 180deg 225deg,
+    #d3baff 225deg 270deg,
+    #ffbaff 270deg 315deg,
+    #e0e0e0 315deg 360deg
+  );
+}
+.mini-label {
+  margin-top: 5px;
+  background-color: #343a40;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.65rem;
+  font-weight: bold;
+}
+
+/* 모달창 */
+.roulette-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s;
+}
+.roulette-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+.roulette-zoom-container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  position: relative;
+  transform: scale(0.5);
+  transition: 0.4s;
+  width: 90vw;
+  max-width: 350px;
+}
+.roulette-overlay.show .roulette-zoom-container {
+  transform: scale(1);
+}
+.close-roulette {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.roulette-board {
+  position: relative;
+  width: 260px;
+  height: 260px;
+  margin: 20px auto;
+}
+.roulette-wheel {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 6px solid #343a40;
+  box-sizing: border-box;
+  background: conic-gradient(
+    #ffb3ba 0 45deg,
+    #ffdfba 45deg 90deg,
+    #ffffba 90deg 135deg,
+    #baffc9 135deg 180deg,
+    #bae1ff 180deg 225deg,
+    #d3baff 225deg 270deg,
+    #ffbaff 270deg 315deg,
+    #e0e0e0 315deg 360deg
+  );
+  transition: transform 4s cubic-bezier(0.1, 0.8, 0.1, 1);
+}
+.roulette-item {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60px;
+  height: 20px;
+  margin-left: -30px;
+  margin-top: -10px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 0.85rem;
+  color: #333;
+}
+.roulette-pointer-large {
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2.5rem;
+  color: #dc3545;
+  z-index: 10;
+}
+.spin-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  background-color: #343a40;
+  color: white;
+  border: 3px solid white;
+  border-radius: 50%;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10;
+}
+.spin-btn:active {
+  transform: translate(-50%, -50%) scale(0.9);
+}
+.roulette-result {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #007bff;
+  margin-top: 10px;
+  min-height: 25px;
+}
+
+/* 📱 모바일/태블릿 화면 크기가 작아질 때 추가 조정 */
+@media (max-width: 768px) {
+  .fridge-container {
+    height: 50vh;
+  }
+  .table {
+    min-height: 50px;
+    padding: 10px;
+  }
+  .food-item {
+    width: 35px;
+    height: 35px;
+  }
+  .trash-bin {
+    width: 55px;
+    height: 65px;
+    top: 10px;
+    left: 10px;
+  }
+  .trash-icon {
+    font-size: 1.3rem;
+  }
+  .exit-wrapper {
+    top: 10px;
+    right: 10px;
+    transform: scale(0.8);
+    transform-origin: top right;
+  }
+  .dispenser {
+    display: none; /* 화면이 작으면 디스펜서 숨김 */
+  }
 }

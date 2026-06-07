@@ -2,36 +2,199 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
     <title>나만의 냉장고</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div id="trash-bin" class="trash-bin drop-zone">
+      <span class="trash-icon">🗑️</span>
+      <span class="trash-label">버리기</span>
+    </div>
+
+    <div class="kitchen-area">
+      <div class="controls">
+        <select id="item-select">
+          <option value="김치">🥬 김치</option>
+          <option value="물">💧 물</option>
+          <option value="고기">🥩 고기</option>
+          <option value="야채">🥦 야채</option>
+          <option value="계란">🥚 계란</option>
+          <option value="사과">🍎 사과 (과일)</option>
+        </select>
+        <button id="add-btn">식탁에 놓기</button>
+      </div>
+      <div id="table-zone" class="drop-zone table">
+        <span class="table-label">주방 식탁 (이곳에서 냉장고로 옮기세요)</span>
+      </div>
+    </div>
+
     <div class="fridge-container">
       <div class="fridge-half left-half">
         <input type="checkbox" id="left-door-toggle" class="door-toggle" />
-
         <div class="compartment freezer">
           <h2>냉동실</h2>
-          <p>여기에 얼음, 고기 등 재료 배치</p>
+          <div class="shelves">
+            <div class="shelf drop-zone"></div>
+            <div class="shelf drop-zone"></div>
+            <div class="shelf drop-zone"></div>
+            <div class="shelf drop-zone"></div>
+          </div>
+          <div class="drawers">
+            <div class="drawer-container">
+              <div class="drawer-body drop-zone"></div>
+              <div class="drawer-front">
+                <span class="drawer-handle"></span
+                ><span class="drawer-label">얼음/육류</span>
+              </div>
+            </div>
+            <div class="drawer-container">
+              <div class="drawer-body drop-zone"></div>
+              <div class="drawer-front">
+                <span class="drawer-handle"></span
+                ><span class="drawer-label">냉동식품</span>
+              </div>
+            </div>
+          </div>
         </div>
-
         <label for="left-door-toggle" class="door left-door">
-          <span class="handle left-handle"></span>
+          <div class="door-inner">
+            <div class="door-bin drop-zone"></div>
+            <div class="door-bin drop-zone"></div>
+            <div class="door-bin drop-zone"></div>
+            <div class="door-bin drop-zone"></div>
+          </div>
+          <div class="door-outer">
+            <div class="dispenser">
+              <div class="dispenser-screen"></div>
+              <div class="dispenser-tray"></div>
+            </div>
+            <span class="handle left-handle"></span>
+          </div>
         </label>
       </div>
 
       <div class="fridge-half right-half">
         <input type="checkbox" id="right-door-toggle" class="door-toggle" />
-
         <div class="compartment fridge">
           <h2>냉장실</h2>
-          <p>여기에 채소, 음료 등 재료 배치</p>
+          <div class="shelves">
+            <div class="shelf drop-zone"></div>
+            <div class="shelf drop-zone"></div>
+            <div class="shelf drop-zone"></div>
+            <div class="shelf drop-zone"></div>
+          </div>
+          <div class="drawers">
+            <div class="drawer-container">
+              <div class="drawer-body drop-zone"></div>
+              <div class="drawer-front">
+                <span class="drawer-handle"></span
+                ><span class="drawer-label">야채실</span>
+              </div>
+            </div>
+            <div class="drawer-container">
+              <div class="drawer-body drop-zone"></div>
+              <div class="drawer-front">
+                <span class="drawer-handle"></span
+                ><span class="drawer-label">과일실</span>
+              </div>
+            </div>
+          </div>
         </div>
-
         <label for="right-door-toggle" class="door right-door">
-          <span class="handle right-handle"></span>
+          <div class="door-inner">
+            <div class="door-bin drop-zone"></div>
+            <div class="door-bin drop-zone"></div>
+            <div class="door-bin drop-zone"></div>
+            <div class="door-bin drop-zone"></div>
+          </div>
+          <div class="door-outer">
+            <span class="handle right-handle"></span>
+
+            <div class="mini-roulette" id="mini-roulette-btn">
+              <div class="mini-pointer">▼</div>
+              <div class="mini-wheel"></div>
+              <span class="mini-label">저메추!</span>
+            </div>
+          </div>
         </label>
       </div>
     </div>
+
+    <div class="exit-wrapper">
+      <a href="livingroom.html" class="exit-door-frame">
+        <div class="exit-door"><span class="door-knob"></span></div>
+        <span class="exit-label">거실 🚪</span>
+      </a>
+    </div>
+
+    <div class="roulette-overlay" id="roulette-modal">
+      <div class="roulette-zoom-container">
+        <button class="close-roulette" id="close-roulette-btn">✖ 닫기</button>
+        <h2>오늘 저녁은 뭐 먹지? 🤤</h2>
+        <div class="roulette-board">
+          <div class="roulette-wheel" id="main-roulette-wheel">
+            <div
+              class="roulette-item"
+              style="transform: rotate(22.5deg) translateY(-110px)"
+            >
+              치킨
+            </div>
+            <div
+              class="roulette-item"
+              style="transform: rotate(67.5deg) translateY(-110px)"
+            >
+              피자
+            </div>
+            <div
+              class="roulette-item"
+              style="transform: rotate(112.5deg) translateY(-110px)"
+            >
+              족발
+            </div>
+            <div
+              class="roulette-item"
+              style="transform: rotate(157.5deg) translateY(-110px)"
+            >
+              삼겹살
+            </div>
+            <div
+              class="roulette-item"
+              style="transform: rotate(202.5deg) translateY(-110px)"
+            >
+              햄버거
+            </div>
+            <div
+              class="roulette-item"
+              style="transform: rotate(247.5deg) translateY(-110px)"
+            >
+              떡볶이
+            </div>
+            <div
+              class="roulette-item"
+              style="transform: rotate(292.5deg) translateY(-110px)"
+            >
+              샐러드
+            </div>
+            <div
+              class="roulette-item"
+              style="transform: rotate(337.5deg) translateY(-110px)"
+            >
+              마라탕
+            </div>
+          </div>
+          <div class="roulette-pointer-large">▼</div>
+          <button class="spin-btn" id="spin-btn">SPIN</button>
+        </div>
+        <div id="roulette-result" class="roulette-result">
+          버튼을 눌러보세요!
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
   </body>
 </html>

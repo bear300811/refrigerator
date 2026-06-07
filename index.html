@@ -36,6 +36,8 @@
       <div class="fridge-half left-half">
         <input type="checkbox" id="left-door-toggle" class="door-toggle" />
         <div class="compartment freezer">
+          <div class="frost-layer"></div>
+
           <h2>냉동실</h2>
           <div class="shelves">
             <div class="shelf drop-zone"></div>
@@ -48,14 +50,14 @@
               <div class="drawer-body drop-zone"></div>
               <div class="drawer-front">
                 <span class="drawer-handle"></span
-                ><span class="drawer-label">얼음/육류</span>
+                ><span class="drawer-label">얼음 / 육류</span>
               </div>
             </div>
             <div class="drawer-container">
               <div class="drawer-body drop-zone"></div>
               <div class="drawer-front">
                 <span class="drawer-handle"></span
-                ><span class="drawer-label">냉동식품</span>
+                ><span class="drawer-label">냉동 식품</span>
               </div>
             </div>
           </div>
@@ -92,14 +94,14 @@
               <div class="drawer-body drop-zone"></div>
               <div class="drawer-front">
                 <span class="drawer-handle"></span
-                ><span class="drawer-label">야채실</span>
+                ><span class="drawer-label">신선 야채실</span>
               </div>
             </div>
             <div class="drawer-container">
               <div class="drawer-body drop-zone"></div>
               <div class="drawer-front">
                 <span class="drawer-handle"></span
-                ><span class="drawer-label">과일실</span>
+                ><span class="drawer-label">과일 보관함</span>
               </div>
             </div>
           </div>
@@ -113,7 +115,6 @@
           </div>
           <div class="door-outer">
             <span class="handle right-handle"></span>
-
             <div class="mini-roulette" id="mini-roulette-btn">
               <div class="mini-pointer">▼</div>
               <div class="mini-wheel"></div>
@@ -123,14 +124,6 @@
         </label>
       </div>
     </div>
-
-    <div class="exit-wrapper">
-      <a href="livingroom.html" class="exit-door-frame">
-        <div class="exit-door"><span class="door-knob"></span></div>
-        <span class="exit-label">거실 🚪</span>
-      </a>
-    </div>
-
     <div class="roulette-overlay" id="roulette-modal">
       <div class="roulette-zoom-container">
         <button class="close-roulette" id="close-roulette-btn">✖ 닫기</button>
@@ -190,9 +183,18 @@
           <button class="spin-btn" id="spin-btn">SPIN</button>
         </div>
         <div id="roulette-result" class="roulette-result">
-          버튼을 눌러보세요!
+          가운데 SPIN 버튼을 눌러보세요!
         </div>
       </div>
+    </div>
+
+    <div class="exit-wrapper">
+      <a href="livingroom.html" class="exit-door-frame">
+        <div class="exit-door">
+          <span class="door-knob"></span>
+        </div>
+        <span class="exit-label">거실 🚪</span>
+      </a>
     </div>
 
     <script src="script.js"></script>

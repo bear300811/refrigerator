@@ -1,37 +1,36 @@
-// 1. 식재료 정보 및 데이터
 const foodData = {
   김치: {
-    img: '김치.jpg',
+    img: 'img/김치.jpg',
     fridge: '냉장: 6개월 ~ 1년',
     freezer: '냉동 비권장',
     room: '실온 (빨리 쉼!)',
   },
   물: {
-    img: '물병.jpg',
+    img: 'img/물병.jpg',
     fridge: '냉장: 6개월',
     freezer: '냉동 가능(팽창)',
     room: '상온 (안전)',
   },
   고기: {
-    img: '고기.jpg',
+    img: 'img/고기.jpg',
     fridge: '냉장: 3~5일',
     freezer: '냉동: 6~12개월',
     room: '실온 (부패 위험!)',
   },
   야채: {
-    img: '야채.avif',
+    img: 'img/야채.jpg',
     fridge: '냉장: 5~7일',
     freezer: '냉동: 8~12개월',
     room: '실온 (시듦!)',
   },
   계란: {
-    img: '계란.jpg',
+    img: 'img/계란.jpg',
     fridge: '냉장: 3~5주',
     freezer: '냉동: 1년',
     room: '실온 (빠른 섭취)',
   },
   사과: {
-    img: '사과.jpg',
+    img: 'img/사과.jpg',
     fridge: '냉장: 3~4주',
     freezer: '냉동: 10~12개월',
     room: '실온 (벌레 꼬임)',
@@ -40,7 +39,6 @@ const foodData = {
 
 let itemCount = 0
 
-// 2. 아이템 생성 함수
 function addItem() {
   const select = document.getElementById('item-select')
   const itemName = select.value
@@ -64,7 +62,6 @@ function addItem() {
   itemBox.appendChild(imgElement)
   itemBox.appendChild(tooltip)
 
-  // --- PC 마우스 드래그 이벤트 ---
   itemBox.addEventListener('dragstart', (e) => {
     e.dataTransfer.setData('text/plain', itemBox.id)
     setTimeout(() => itemBox.classList.add('dragging'), 0)
@@ -73,7 +70,6 @@ function addItem() {
     itemBox.classList.remove('dragging'),
   )
 
-  // --- 📱 모바일 터치 드래그 이벤트 ---
   itemBox.addEventListener('touchstart', handleTouchStart, { passive: false })
   itemBox.addEventListener('touchmove', handleTouchMove, { passive: false })
   itemBox.addEventListener('touchend', handleTouchEnd)
@@ -83,21 +79,17 @@ function addItem() {
 
 document.getElementById('add-btn').addEventListener('click', addItem)
 
-// 3. 서랍 여닫기
 document.querySelectorAll('.drawer-front').forEach((front) => {
   front.addEventListener('click', () => {
     front.closest('.drawer-container').classList.toggle('open')
   })
 })
 
-// 4. 공통 드롭 로직 (PC와 모바일에서 함께 사용)
 function processDrop(draggedElement, dropTarget) {
-  // 쓰레기통 처리
   if (dropTarget.closest('#trash-bin')) {
     draggedElement.remove()
     return
   }
-  // 서랍 닫힘 처리
   if (dropTarget.classList.contains('drawer-body')) {
     if (!dropTarget.closest('.drawer-container').classList.contains('open')) {
       alert('서랍이 닫혀있습니다! 열고 넣어주세요.')
@@ -107,7 +99,6 @@ function processDrop(draggedElement, dropTarget) {
 
   dropTarget.appendChild(draggedElement)
 
-  // 유통기한 말풍선 업데이트
   const itemName = draggedElement.dataset.name
   const tooltip = draggedElement.querySelector('.tooltip')
 
@@ -123,7 +114,6 @@ function processDrop(draggedElement, dropTarget) {
   }
 }
 
-// PC 드래그 앤 드롭 존 설정
 document.querySelectorAll('.drop-zone').forEach((zone) => {
   zone.addEventListener('dragover', (e) => e.preventDefault())
   zone.addEventListener('drop', (e) => {
@@ -136,14 +126,13 @@ document.querySelectorAll('.drop-zone').forEach((zone) => {
   })
 })
 
-// --- 📱 모바일 터치 처리 함수 ---
 let touchActiveItem = null
 
 function handleTouchStart(e) {
   touchActiveItem = e.target.closest('.food-item')
   if (touchActiveItem) {
     touchActiveItem.classList.add('dragging')
-    e.preventDefault() // 화면 스크롤 방지
+    e.preventDefault()
   }
 }
 
@@ -151,8 +140,6 @@ function handleTouchMove(e) {
   if (!touchActiveItem) return
   e.preventDefault()
   const touch = e.touches[0]
-
-  // 터치 위치에 따라 아이템이 손가락을 따라오게 절대좌표 변경
   touchActiveItem.style.position = 'fixed'
   touchActiveItem.style.left =
     touch.clientX - touchActiveItem.offsetWidth / 2 + 'px'
@@ -164,13 +151,11 @@ function handleTouchEnd(e) {
   if (!touchActiveItem) return
   touchActiveItem.classList.remove('dragging')
 
-  // 아이템을 잠깐 숨겨서 손가락 아래에 있는 '드롭존'을 찾아냄
   touchActiveItem.style.display = 'none'
   const touch = e.changedTouches[0]
   let elemUnderTouch = document.elementFromPoint(touch.clientX, touch.clientY)
   touchActiveItem.style.display = 'flex'
 
-  // 아이템을 원래 흐름으로 복구
   touchActiveItem.style.position = ''
   touchActiveItem.style.left = ''
   touchActiveItem.style.top = ''
@@ -184,7 +169,6 @@ function handleTouchEnd(e) {
   touchActiveItem = null
 }
 
-// 5. 저메추 룰렛 기능
 document.getElementById('mini-roulette-btn').addEventListener('click', (e) => {
   e.preventDefault()
   document.getElementById('roulette-modal').classList.add('show')
@@ -231,3 +215,39 @@ document.getElementById('spin-btn').addEventListener('click', () => {
     isSpinning = false
   }, 4000)
 })
+
+// ==========================================
+// 💡 문 열림 감지 및 조명/성에 효과 제어 (수정 완료)
+// ==========================================
+function setupDoorEffects() {
+  const leftToggle = document.getElementById('left-door-toggle')
+  const rightToggle = document.getElementById('right-door-toggle')
+
+  // 왼쪽 문 (냉동실)
+  leftToggle.addEventListener('change', (e) => {
+    const freezer = document.querySelector('.freezer')
+    const frost = document.querySelector('.frost-layer')
+    if (e.target.checked) {
+      freezer.classList.add('light-on') // 조명 켜짐
+      if (frost) {
+        // HTML에 태그가 있는지 에러 방지 체크
+        frost.classList.add('frost-active')
+        setTimeout(() => frost.classList.remove('frost-active'), 1000)
+      }
+    } else {
+      freezer.classList.remove('light-on')
+    }
+  })
+
+  // 오른쪽 문 (냉장실)
+  rightToggle.addEventListener('change', (e) => {
+    const fridge = document.querySelector('.fridge')
+    if (e.target.checked) {
+      fridge.classList.add('light-on')
+    } else {
+      fridge.classList.remove('light-on')
+    }
+  })
+}
+
+setupDoorEffects()

@@ -215,3 +215,106 @@ document.getElementById('spin-btn').addEventListener('click', () => {
     isSpinning = false
   }, 4000)
 })
+
+// ==========================================
+// 🎮 미니게임: 음식 짝맞추기 (Memory Game)
+// ==========================================
+document.getElementById('mini-game-btn').addEventListener('click', (e) => {
+  e.preventDefault()
+  document.getElementById('game-modal').classList.add('show')
+  initGame() // 모달을 열 때마다 게임을 초기화해서 새 게임 시작
+})
+
+document.getElementById('close-game-btn').addEventListener('click', () => {
+  document.getElementById('game-modal').classList.remove('show')
+})
+
+document.getElementById('reset-game-btn').addEventListener('click', initGame)
+
+const board = document.getElementById('memory-board')
+const gameResult = document.getElementById('game-result')
+// 실제 식재료 6가지를 이모지로 사용 (총 12장)
+const emojis = ['🥬', '💧', '🥩', '🥦', '🥚', '🍎']
+let cards = []
+let hasFlippedCard = false
+let lockBoard = false
+let firstCard, secondCard
+let matchCount = 0
+
+let moves = 0 // 시도 횟수 변수
+
+function initGame() {
+  board.innerHTML = ''
+  matchCount = 0
+  moves = 0 // 초기화
+  document.getElementById('move-counter').textContent = '시도 횟수: 0'
+  gameResult.style.color = '#007bff'
+  gameResult.textContent = '모든 카드의 짝을 맞추세요!'
+  hasFlippedCard = false
+  lockBoard = false
+  firstCard = null
+  secondCard = null
+
+  cards = [...emojis, ...emojis]
+  cards.sort(() => Math.random() - 0.5) // 섞기
+
+  cards.forEach((emoji) => {
+    const cardElement = document.createElement('div')
+    cardElement.classList.add('memory-card')
+    cardElement.dataset.food = emoji
+    cardElement.innerHTML = `<div class="memory-card-front"></div><div class="memory-card-back">${emoji}</div>`
+    cardElement.addEventListener('click', flipCard)
+    board.appendChild(cardElement)
+  })
+}
+
+function flipCard() {
+  if (lockBoard || this === firstCard || this.classList.contains('flip')) return
+
+  this.classList.add('flip')
+
+  if (!hasFlippedCard) {
+    hasFlippedCard = true
+    firstCard = this
+    return
+  }
+
+  secondCard = this
+  moves++ // 카드 두 장을 다 뒤집었을 때 횟수 증가
+  document.getElementById('move-counter').textContent = `시도 횟수: ${moves}`
+  checkForMatch()
+}
+
+function checkForMatch() {
+  let isMatch = firstCard.dataset.food === secondCard.dataset.food
+  if (isMatch) {
+    disableCards()
+    matchCount += 1
+    if (matchCount === emojis.length) {
+      gameResult.style.color = '#dc3545'
+      gameResult.textContent = `🎉 성공! 총 ${moves}번 만에 맞췄어요! 🎉`
+    }
+  } else {
+    unflipCards()
+  }
+}
+
+function disableCards() {
+  firstCard.removeEventListener('click', flipCard)
+  secondCard.removeEventListener('click', flipCard)
+  resetBoard()
+}
+
+function unflipCards() {
+  lockBoard = true
+  setTimeout(() => {
+    firstCard.classList.remove('flip')
+    secondCard.classList.remove('flip')
+    resetBoard()
+  }, 800) // 0.8초 동안 두 번째 카드 보여주고 다시 뒤집음
+}
+
+function resetBoard() {
+  ;[hasFlippedCard, lockBoard] = [false, false]
+  ;[firstCard, secondCard] = [null, null]
+}

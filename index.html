@@ -75,8 +75,13 @@
               <div class="dispenser-tray"></div>
             </div>
             <span class="handle left-handle"></span>
+
+            <div class="mini-game" id="mini-game-btn">
+              <div class="game-icon">👾</div>
+              <span class="mini-label">짝맞추기</span>
+
           </div>
-        </label>
+        </label></div>
       </div>
 
       <div class="fridge-half right-half">
@@ -188,6 +193,8 @@
       </div>
     </div>
 
+  
+
     <div class="exit-wrapper">
       <a href="livingroom.html" class="exit-door-frame">
         <div class="exit-door">
@@ -195,6 +202,20 @@
         </div>
         <span class="exit-label">거실 🚪</span>
       </a>
+    </div>
+
+    <div class="game-overlay" id="game-modal">
+      <div class="game-zoom-container">
+        <button class="close-game" id="close-game-btn">✖ 닫기</button>
+        <h2>음식 짝맞추기 🧠</h2>
+
+        <div id="move-counter" style="margin-bottom: 10px; font-weight: bold; color: #555;">시도 횟수: 0</div>
+        
+        <div class="game-board" id="memory-board"></div>
+        
+        <div id="game-result" class="game-result">모든 카드의 짝을 맞추세요!</div>
+        <button class="reset-btn" id="reset-game-btn">다시 섞기</button>
+      </div>
     </div>
 
     <script src="script.js"></script>

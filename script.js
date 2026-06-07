@@ -202,12 +202,12 @@ document.getElementById('spin-btn').addEventListener('click', () => {
     const menus = [
       '치킨',
       '피자',
-      '족발',
+      '라면',
       '삼겹살',
       '햄버거',
       '떡볶이',
       '샐러드',
-      '마라탕',
+      '제육볶음',
     ]
 
     resultText.style.color = '#dc3545'
@@ -215,39 +215,3 @@ document.getElementById('spin-btn').addEventListener('click', () => {
     isSpinning = false
   }, 4000)
 })
-
-// ==========================================
-// 💡 문 열림 감지 및 조명/성에 효과 제어 (수정 완료)
-// ==========================================
-function setupDoorEffects() {
-  const leftToggle = document.getElementById('left-door-toggle')
-  const rightToggle = document.getElementById('right-door-toggle')
-
-  // 왼쪽 문 (냉동실)
-  leftToggle.addEventListener('change', (e) => {
-    const freezer = document.querySelector('.freezer')
-    const frost = document.querySelector('.frost-layer')
-    if (e.target.checked) {
-      freezer.classList.add('light-on') // 조명 켜짐
-      if (frost) {
-        // HTML에 태그가 있는지 에러 방지 체크
-        frost.classList.add('frost-active')
-        setTimeout(() => frost.classList.remove('frost-active'), 1000)
-      }
-    } else {
-      freezer.classList.remove('light-on')
-    }
-  })
-
-  // 오른쪽 문 (냉장실)
-  rightToggle.addEventListener('change', (e) => {
-    const fridge = document.querySelector('.fridge')
-    if (e.target.checked) {
-      fridge.classList.add('light-on')
-    } else {
-      fridge.classList.remove('light-on')
-    }
-  })
-}
-
-setupDoorEffects()

@@ -22,24 +22,23 @@ body {
 /* 주방 식탁 및 컨트롤 */
 .kitchen-area {
   width: 90vw;
-  max-width: 600px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  max-width: 950px;
+  margin-top: 15px;
+  margin-bottom: 15px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
   z-index: 10;
 }
 .controls {
   display: flex;
-  gap: 8px;
+  gap: 10px;
   flex-wrap: wrap;
-  justify-content: center;
 }
 select,
 button {
   padding: 8px 12px;
-  font-size: 0.9rem;
+  font-size: 1rem;
   border-radius: 5px;
   border: 1px solid #ccc;
 }
@@ -58,11 +57,11 @@ button:hover {
   background-color: #dcb897;
   border: 4px solid #a87b51;
   border-radius: 10px;
-  min-height: 65px;
+  min-height: 75px;
   padding: 15px;
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px;
   position: relative;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
@@ -72,7 +71,7 @@ button:hover {
   top: 4px;
   left: 10px;
   color: #724e2c;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-weight: bold;
   pointer-events: none;
 }
@@ -80,10 +79,10 @@ button:hover {
 /* 🗑️ 쓰레기통 */
 .trash-bin {
   position: fixed;
-  top: 15px;
-  left: 15px;
-  width: 70px;
-  height: 80px;
+  top: 20px;
+  left: 20px;
+  width: 80px;
+  height: 90px;
   background-color: #f8d7da;
   border: 3px dashed #dc3545;
   border-radius: 10px;
@@ -106,28 +105,28 @@ button:hover {
   border-style: solid;
 }
 .trash-icon {
-  font-size: 1.8rem;
+  font-size: 2rem;
   pointer-events: none;
 }
 .trash-label {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   pointer-events: none;
 }
 
 /* 🚪 거실로 나가는 문 */
 .exit-wrapper {
   position: fixed;
-  top: 15px;
-  right: 15px;
+  top: 20px;
+  right: 20px;
   perspective: 800px;
   z-index: 999;
 }
 .exit-door-frame {
   display: block;
-  width: 70px;
-  height: 120px;
+  width: 80px;
+  height: 140px;
   background-color: #2c1a0f;
-  border: 5px solid #8b5a2b;
+  border: 6px solid #8b5a2b;
   border-bottom: none;
   position: relative;
   text-decoration: none;
@@ -148,22 +147,22 @@ button:hover {
   position: absolute;
   right: 8px;
   top: 50%;
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   background-color: #ffd700;
   border-radius: 50%;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 .exit-label {
   position: absolute;
-  bottom: -30px;
+  bottom: -35px;
   left: 50%;
   transform: translateX(-50%);
   background-color: #343a40;
   color: white;
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 0.75rem;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.85rem;
   font-weight: bold;
   white-space: nowrap;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
@@ -172,11 +171,11 @@ button:hover {
   transform: rotateY(-25deg);
 }
 
-/* 움직이는 입체 음식 아이템 */
+/* 입체 음식 아이템 */
 .food-item {
   position: relative;
-  width: 45px;
-  height: 45px;
+  width: 50px;
+  height: 50px;
   cursor: grab;
   user-select: none;
   transition: transform 0.1s;
@@ -193,9 +192,6 @@ button:hover {
   box-shadow: 2px 5px 8px rgba(0, 0, 0, 0.4);
   pointer-events: none;
 }
-.food-item:active {
-  cursor: grabbing;
-}
 .food-item.dragging {
   opacity: 0.5;
   transform: scale(1.1);
@@ -211,9 +207,9 @@ button:hover {
   background-color: #dc3545;
   color: white;
   text-align: center;
-  padding: 5px 8px;
+  padding: 6px 10px;
   border-radius: 6px;
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   font-weight: bold;
   white-space: nowrap;
   z-index: 1000;
@@ -239,18 +235,18 @@ button:hover {
   opacity: 1;
 }
 
-/* 냉장고 전체 외관 */
+/* 냉장고 전체 외관  */
 .fridge-container {
   display: flex;
   width: 90vw;
   max-width: 650px;
   height: 65vh;
   max-height: 650px;
-  border: 10px solid #8e949a;
+  border: 12px solid #8e949a;
   border-radius: 12px;
   background-color: #ccd3d9;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-  perspective: 2000px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+  perspective: 2500px;
   box-sizing: border-box;
 }
 .fridge-half {
@@ -266,7 +262,7 @@ button:hover {
 }
 
 /* =========================================
-   💡 내부 조명 & ❄️ 성에 효과 (최종 통합본)
+   💡 내부 조명 & ❄️ 성에 효과 
 ========================================= */
 .compartment {
   position: absolute;
@@ -275,57 +271,65 @@ button:hover {
   width: 100%;
   height: 100%;
   background-color: #ffffff;
-  padding: 10px;
+  padding: 15px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   z-index: 1;
-  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.08); /* 기본 그림자 */
-  transition: box-shadow 0.4s ease; /* 조명이 부드럽게 켜지는 효과 */
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.4s ease-in-out;
 }
 
-/* JS에서 문을 열면 이 클래스가 추가되어 내부가 환해짐 */
-.compartment.light-on {
-  box-shadow: inset 0 0 60px rgba(255, 255, 255, 0.9) !important;
+/* 문이 열리면(checked) 형제 요소인 compartment 조명을 켬 */
+#left-door-toggle:checked ~ .compartment,
+#right-door-toggle:checked ~ .compartment {
+  box-shadow: inset 0 0 100px rgba(255, 220, 100, 0.8) !important;
 }
 
-/* 성에 효과 기본 상태 (투명) */
+/* 냉동실 성에 베이스 */
 .frost-layer {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(255, 255, 255, 0.75);
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.95),
+    rgba(255, 255, 255, 0.3)
+  );
   pointer-events: none;
   opacity: 0;
-  z-index: 3;
+  z-index: 20;
 }
 
-/* JS에서 냉동실 문을 열면 애니메이션 실행 */
-.frost-layer.frost-active {
-  animation: frost-fade 1s ease-out forwards;
+/* 냉동실 문이 열리면 성에 뿜어내기 */
+#left-door-toggle:checked ~ .compartment .frost-layer {
+  animation: frost-blast 1.5s ease-out forwards;
 }
 
-@keyframes frost-fade {
+@keyframes frost-blast {
   0% {
-    opacity: 0.9;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
   }
   100% {
     opacity: 0;
   }
 }
-
 /* ========================================= */
 
 h2 {
   text-align: center;
   color: #343a40;
-  margin: 0 0 6px 0;
-  font-size: 1rem;
-  letter-spacing: 1px;
+  margin: 0 0 10px 0;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
   flex-shrink: 0;
 }
+
 .shelves {
   flex: 1;
   display: flex;
@@ -377,7 +381,10 @@ h2 {
   align-items: center;
   background-color: rgba(255, 255, 255, 0.15);
   z-index: 1;
+  border-radius: 4px;
 }
+
+/* 서랍 앞면 (크기 조정) */
 .drawer-front {
   position: absolute;
   top: 0;
@@ -398,7 +405,12 @@ h2 {
   justify-content: center;
   cursor: pointer;
   z-index: 5;
-  transition: transform 0.4s;
+  transition:
+    transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+    background-color 0.4s;
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.08),
+    inset 0 2px 4px rgba(255, 255, 255, 0.5);
 }
 .drawer-handle {
   width: 50px;
@@ -407,6 +419,7 @@ h2 {
   border: 1px solid #adb5bd;
   border-radius: 4px;
   margin-bottom: 3px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 .drawer-label {
   font-size: 0.75rem;
@@ -414,13 +427,49 @@ h2 {
   color: #495057;
   user-select: none;
 }
+
+/* 서랍 열림 효과: 밖으로 튀어나오지 않게 이동 거리(30px) 축소 */
 .drawer-container.open .drawer-front {
   transform: translateY(30px) translateZ(10px);
-  opacity: 0;
-  pointer-events: none;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.25) 0%,
+    rgba(248, 249, 250, 0.05) 60%,
+    rgba(206, 212, 218, 0.15) 100%
+  );
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+}
+.drawer-handle {
+  width: 60px;
+  height: 10px;
+  background: linear-gradient(to bottom, #dee2e6, #ffffff);
+  border: 1px solid #adb5bd;
+  border-radius: 4px;
+  margin-bottom: 5px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+.drawer-label {
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #495057;
+  user-select: none;
 }
 
-/* 문 회전 축 & 열림 각도 제한 */
+/* 서랍 열림 효과: 완전히 사라지지 않고 아래로 미끄러져 내려감 */
+.drawer-container.open .drawer-front {
+  transform: translateY(40px) translateZ(15px);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.25) 0%,
+    rgba(248, 249, 250, 0.05) 60%,
+    rgba(206, 212, 218, 0.15) 100%
+  );
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* 문 회전 축 & 열림 각도 제한  */
 .door-toggle {
   display: none;
 }
@@ -442,10 +491,10 @@ h2 {
   transform-origin: right center;
 }
 #left-door-toggle:checked ~ .left-door {
-  transform: rotateY(-110deg);
+  transform: rotateY(-130deg);
 }
 #right-door-toggle:checked ~ .right-door {
-  transform: rotateY(110deg);
+  transform: rotateY(130deg);
 }
 
 .door-outer,
@@ -472,74 +521,79 @@ h2 {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  padding: 20px 10px;
+  padding: 30px 15px;
 }
 .door-bin {
   flex: 1;
-  margin: 4px 0;
-  min-height: 40px;
+  margin: 5px 0;
+  min-height: 45px;
   background-color: rgba(255, 255, 255, 0.7);
   border: 2px solid #e9ecef;
-  border-radius: 4px 4px 15px 15px;
+  border-radius: 4px 4px 18px 18px;
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
-  padding: 8px 5px 5px 5px;
+  gap: 8px;
+  padding: 10px 6px 6px 6px;
   align-items: flex-end;
   box-sizing: border-box;
+  box-shadow:
+    inset 0 -3px 6px rgba(0, 0, 0, 0.05),
+    0 4px 10px rgba(0, 0, 0, 0.08);
 }
 .handle {
   position: absolute;
   top: 50%;
-  width: 18px;
-  height: 40%;
+  width: 22px;
+  height: 45%;
   background: linear-gradient(to right, #495057, #212529 30%, #343a40);
   transform: translateY(-50%);
-  border-radius: 10px;
+  border-radius: 12px;
   box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.35);
 }
 .left-handle {
-  right: 15px;
+  right: 25px;
 }
 .right-handle {
-  left: 15px;
+  left: 25px;
 }
 
 /* 디스펜서 & 미니룰렛 */
 .dispenser {
   position: absolute;
   top: 30%;
-  right: 45px;
-  width: 70px;
-  height: 120px;
+  right: 85px;
+  width: 115px;
+  height: 185px;
   background-color: #1a1d20;
-  border-radius: 6px;
+  border-radius: 8px;
+  border: 2px solid #495057;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 10px;
+  padding-top: 15px;
   box-sizing: border-box;
 }
 .dispenser-screen {
-  width: 45px;
-  height: 20px;
+  width: 75px;
+  height: 25px;
   background-color: #0b0c0d;
   border-radius: 3px;
-  margin-bottom: 10px;
+  border: 1px solid #343a40;
+  margin-bottom: 15px;
 }
 .dispenser-tray {
-  width: 55px;
-  height: 10px;
+  width: 85px;
+  height: 14px;
   background-color: #343a40;
   border-radius: 4px;
   margin-top: auto;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 .mini-roulette {
   position: absolute;
-  top: 15px;
-  right: 15px;
-  width: 50px;
+  top: 25px;
+  right: 20px;
+  width: 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -552,17 +606,17 @@ h2 {
 }
 .mini-pointer {
   color: #dc3545;
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: bold;
   margin-bottom: -5px;
   z-index: 2;
   text-shadow: 1px 1px 1px black;
 }
 .mini-wheel {
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
-  border: 2px solid #343a40;
+  border: 3px solid #343a40;
   background: conic-gradient(
     #ffb3ba 0 45deg,
     #ffdfba 45deg 90deg,
@@ -573,15 +627,17 @@ h2 {
     #ffbaff 270deg 315deg,
     #e0e0e0 315deg 360deg
   );
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 .mini-label {
   margin-top: 5px;
   background-color: #343a40;
   color: white;
-  padding: 2px 6px;
+  padding: 3px 8px;
   border-radius: 4px;
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   font-weight: bold;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
 }
 
 /* 🎰 룰렛 모달창 */
@@ -606,41 +662,42 @@ h2 {
 }
 .roulette-zoom-container {
   background-color: white;
-  padding: 20px;
-  border-radius: 15px;
+  padding: 30px 40px;
+  border-radius: 20px;
   text-align: center;
   position: relative;
   transform: scale(0.5);
-  transition: 0.4s;
+  transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   width: 90vw;
-  max-width: 350px;
+  max-width: 400px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
 }
 .roulette-overlay.show .roulette-zoom-container {
   transform: scale(1);
 }
 .close-roulette {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 15px;
+  right: 15px;
   background: #dc3545;
   color: white;
   border: none;
-  padding: 6px 10px;
+  padding: 8px 12px;
   border-radius: 5px;
   cursor: pointer;
   font-weight: bold;
 }
 .roulette-board {
   position: relative;
-  width: 260px;
-  height: 260px;
-  margin: 20px auto;
+  width: 320px;
+  height: 320px;
+  margin: 30px auto;
 }
 .roulette-wheel {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  border: 6px solid #343a40;
+  border: 8px solid #343a40;
   box-sizing: border-box;
   background: conic-gradient(
     #ffb3ba 0 45deg,
@@ -664,73 +721,92 @@ h2 {
   margin-top: -10px;
   text-align: center;
   font-weight: bold;
-  font-size: 0.85rem;
+  font-size: 1rem;
   color: #333;
 }
 .roulette-pointer-large {
   position: absolute;
-  top: -25px;
+  top: -30px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 2.5rem;
+  font-size: 3rem;
   color: #dc3545;
   z-index: 10;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
 .spin-btn {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 60px;
-  height: 60px;
+  width: 75px;
+  height: 75px;
   background-color: #343a40;
   color: white;
-  border: 3px solid white;
+  border: 4px solid white;
   border-radius: 50%;
   font-weight: bold;
+  font-size: 1.1rem;
   cursor: pointer;
   z-index: 10;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition:
+    transform 0.1s,
+    background-color 0.2s;
 }
 .spin-btn:active {
   transform: translate(-50%, -50%) scale(0.9);
 }
+.spin-btn:hover {
+  background-color: #495057;
+}
 .roulette-result {
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: bold;
   color: #007bff;
-  margin-top: 10px;
+  margin-top: 15px;
   min-height: 25px;
 }
 
-/* 📱 모바일 반응형 */
+/* 📱 모바일/태블릿 반응형 (안전한 설정) */
 @media (max-width: 768px) {
   .fridge-container {
-    height: 50vh;
+    height: 60vh;
+    max-width: 95vw;
+    border-width: 8px;
   }
   .table {
     min-height: 50px;
     padding: 10px;
   }
   .food-item {
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
   }
   .trash-bin {
-    width: 55px;
-    height: 65px;
+    width: 60px;
+    height: 70px;
     top: 10px;
     left: 10px;
   }
   .trash-icon {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
   }
   .exit-wrapper {
     top: 10px;
     right: 10px;
-    transform: scale(0.8);
+    transform: scale(0.85);
     transform-origin: top right;
   }
   .dispenser {
     display: none;
+  }
+
+  /* 모바일에서 문 열림 각도를 좁혀 잘림 방지 */
+  #left-door-toggle:checked ~ .left-door {
+    transform: rotateY(-105deg);
+  }
+  #right-door-toggle:checked ~ .right-door {
+    transform: rotateY(105deg);
   }
 }
